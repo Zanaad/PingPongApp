@@ -1,13 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - manifests/deployment.yaml
-  - manifests/service.yaml
-  - manifests/postgres.yaml
-  - manifests/secret.yaml
+- manifests/deployment.yaml
+- manifests/service.yaml
+- manifests/postgres.yaml
+- manifests/secret.yaml
 images:
-  - name: zanaad/ping-pong-app
-    newName: zanaad/ping-pong-app
-    newTag: latest
-
-    
+- name: pingpong-image
+  newName: zanaad/pingpong
+  newTag: 43fca166e7ea8474cf6f4f8efa60bafb89a86b06
+- name: zanaad/ping-pong-app
+  newName: zanaad/ping-pong-app
+  newTag: latest
