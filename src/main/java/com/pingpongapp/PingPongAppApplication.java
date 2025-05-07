@@ -3,6 +3,8 @@ package com.pingpongapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,16 @@ class PingPongController {
     @GetMapping("/")
     public String healthCheck() {
         return "PingPong App is up!";
+    }
+
+    @GetMapping("/healthz")
+    public ResponseEntity<String> healthCheckDb() {
+        try {
+            jdbcTemplate.queryForObject("SELECT 1", Integer.class);
+            return ResponseEntity.ok("OK - DB reachable");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("Database not reachable");
+        }
     }
 
 

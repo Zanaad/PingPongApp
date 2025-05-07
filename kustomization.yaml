@@ -9,3 +9,5 @@ images:
   - name: zanaad/ping-pong-app
     newName: zanaad/ping-pong-app
     newTag: latest
+
+    
